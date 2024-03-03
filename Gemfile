@@ -16,10 +16,11 @@ gem "devise", "~> 4.9.3"
 gem "bootstrap-sass", "3.4.1"
 gem "sassc-rails", "2.1.2"
 
-gem "iterable-api-client"
-
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
+
+# NOTE: Usually this goes inside tests group, but since we need to mock API calls in every Environment, it's placed here.
+gem "webmock", "~> 3.23.0"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]

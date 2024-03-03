@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
+  # Here we usually check for status and render response accordingly.
   def create
-    # TODO: Handle events based on params {"event_type"=>"Event type" ...}
+    IterableService.call(current_user, params)
+    render json: { status: 200, message: 'Event created successfully!' }, status: :ok
   end
 end
