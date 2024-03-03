@@ -3,6 +3,7 @@
   <head>
     <title>UserEventNotifications</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,6 +12,19 @@
   </head>
 
   <body>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <%= link_to "User Notification App", root_path, id: "logo" %>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "About", static_about_path %></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
     <%= yield %>
+    </div>
   </body>
 </html>
