@@ -19,12 +19,14 @@ class IterableService < ApplicationService
   # 3. On frontend using web socket service like pusher we notify user appropriately.
   def call
     event_response = create_event(user, params[:event_type])
-    email_response = send_email_notification(user.email, params[:event_type]) if params[:event_type] == 'EventB'
+    if params[:event_type] == 'EventB'
+      email_response = send_email_notification(user.email, params[:event_type])
+      return email_response
+    end
+    event_response
   end
 
-  # create_event & send_email_notification uses a slightly different approach showcase heterogeneous solution.
-  # In the real world, we don't do this. Instead we keep things consistent.
-  # Heck, we don't even mock in development because API integration without API key is useless.
+  # create_event & send_email_notification uses Net::HTTP, in real app we should prefer library like RestClient or HTTParty.
   def create_event(user, event_name)
     event_options = build_event_options(user.email, event_name)
     stub_event_request
@@ -33,28 +35,21 @@ class IterableService < ApplicationService
     req = Net::HTTP::Post.new(uri.path)
     req['Content-Length'] = 3
 
-    # Usually, api client librarie like RestClient are preferred
     Net::HTTP.start(uri.host, uri.port) do |http|
       http.request(req, "abc")
     end
   end
 
   def send_email_notification(email, event_type)
-    options = {
-      body: {
-        recipientEmail: email,
-        dataFields: {
-          email_subject: "Event #{event_type} Triggered!",
-          email_body: "Hello world!"
-        }
-      }.to_json,
-      headers: {
-        'Content-Type' => 'application/json',
-        'Api-Key' => @api_key
-      }
-    }
+    stub_email_notification_request
 
-    stub_request(:post, "https://api.iterable.com").with(options).to_return(status: 200, body: "", headers: {})
+    uri = URI.parse("https://api.iterable.com/api/email/target")
+    req = Net::HTTP::Post.new(uri.path)
+    req['Content-Length'] = 3
+
+    Net::HTTP.start(uri.host, uri.port) do |http|
+      http.request(req, "abc")
+    end
   end
 
   private
@@ -75,6 +70,20 @@ class IterableService < ApplicationService
     stub_request(
       :post,
       "http://api.iterable.com:443/api/embedded-messaging/events/click"
+    ).with(
+      body: "abc",
+      headers: {
+        'Accept'=>'*/*',
+        'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'Content-Length'=>'3',
+        'User-Agent'=>'Ruby'
+    }).to_return(status: 200, body: "", headers: {})
+  end
+
+  def stub_email_notification_request
+    stub_request(
+      :post,
+      "http://api.iterable.com:443/api/email/target"
     ).with(
       body: "abc",
       headers: {
