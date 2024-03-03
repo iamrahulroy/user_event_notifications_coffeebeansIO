@@ -28,7 +28,6 @@ class IterableService < ApplicationService
 
   # create_event & send_email_notification uses Net::HTTP, in real app we should prefer library like RestClient or HTTParty.
   def create_event(user, event_name)
-    event_options = build_event_options(user.email, event_name)
     stub_event_request
 
     uri = URI.parse("https://api.iterable.com/api/embedded-messaging/events/click")
@@ -53,19 +52,6 @@ class IterableService < ApplicationService
   end
 
   private
-  def build_event_options(email, event_type)
-    options = {
-      body: {
-        email: email,
-        eventName: event_type
-      }.to_json,
-      headers: {
-        'Content-Type' => 'application/json',
-        'Api-Key' => @api_key
-      }
-    }
-  end
-
   def stub_event_request
     stub_request(
       :post,
