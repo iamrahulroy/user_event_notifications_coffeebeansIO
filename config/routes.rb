@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :events, only: [:create]
+
   devise_for :users
   get 'static/index'
   get 'static/about'

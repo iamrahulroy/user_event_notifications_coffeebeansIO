@@ -123,6 +123,9 @@ GEM
     irb (1.11.2)
       rdoc
       reline (>= 0.4.2)
+    iterable-api-client (0.6.2)
+      multi_json (~> 1.15.0)
+      sorbet-runtime
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -138,6 +141,7 @@ GEM
     mini_mime (1.1.5)
     minitest (5.22.2)
     msgpack (1.7.2)
+    multi_json (1.15.0)
     mutex_m (0.2.0)
     net-imap (0.4.10)
       date
@@ -241,6 +245,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    sorbet-runtime (0.5.11284)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -295,6 +300,7 @@ DEPENDENCIES
   devise (~> 4.9.3)
   factory_bot_rails (~> 6.4.3)
   importmap-rails
+  iterable-api-client
   jbuilder (~> 2.11.5)
   puma (>= 5.0)
   rails (~> 7.1.3, >= 7.1.3.2)

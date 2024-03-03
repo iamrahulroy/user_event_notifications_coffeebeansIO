@@ -1,9 +1,9 @@
 <div class="center jumbotron">
   <h1>User Event Notification App</h1>
-  <h2>This is the home page for the Notification application.</h2>
   <% if user_signed_in? %>
-    <h5>Move to event management page. We are working on a welcome page with event stats, delivery status and what not.</h5>
+    <%= render 'authenticated_events' %>
   <% else %>
+    <h2>This is the home page for the Notification application.</h2>
     <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
   <% end %>
 </div>
