@@ -10,3 +10,8 @@ rails db:migrate
 rails server
 # open http://localhost:3000/
 ```
+
+
+## Notes
+* Tests are done in hurry because I wanted to save time.
+* Sidekiq and Workers aren't used to save time.
