@@ -15,3 +15,4 @@ rails server
 ## Notes
 * Tests are done in hurry because I wanted to save time.
 * Sidekiq and Workers aren't used to save time.
+* Ideally, I should have deployed to heroku.
