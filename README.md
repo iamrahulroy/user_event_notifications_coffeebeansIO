@@ -16,3 +16,4 @@ rails server
 * Tests are done in hurry because I wanted to save time.
 * Sidekiq and Workers aren't used to save time.
 * Ideally, I should have deployed to heroku.
+* I would like to discuss the rest of the trade off in a meeting.
