@@ -15,6 +15,7 @@ rails server
 
 
 ## Notes
+* Service pattern is used to interact with Iterable's API.
 * Tests are done in hurry because I wanted to save time.
 * Sidekiq and Workers aren't used to save time.
 * Ideally, I should have deployed to heroku.
